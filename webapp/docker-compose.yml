@@ -1,0 +1,15 @@
+version: '3'
+services:
+  nodejs:
+    image: nrich-webapp
+
+    ports:
+      - "4444:4444"
+  nginx:
+    image: nrich-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    links:
+      - nodejs
