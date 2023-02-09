@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nrich-webapp
+spec:
+  selector:
+    app: nrich-webapp
+  ports:
+  - name: http
+    port: 4444
+    targetPort: 4444
+  type: ClusterIP
