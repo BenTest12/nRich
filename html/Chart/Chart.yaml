@@ -1,4 +1,4 @@
 apiVersion: v2
-name: mychart
+name: clusterinfo
 version: 1
 description: A Helm chart that deploys a single pod with a configmap and a nodeport service.
