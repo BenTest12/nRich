@@ -1,20 +1,25 @@
 image:
   name: nginx
+  namespace: nginx-namespace
   repository: eu.gcr.io/nrich-terraform/nrich-html
   tag: latest
   pullPolicy: Always
-
-containerPort: 80
+  containerPort: 80
 
 service:
-  name: nginx-nodeport
+  name: nginx-loadbalancer
+  namespace: nginx-namespace
   selector:
     app: nginx
-  targetPort: 80
-  type: NodePort
+  ports:
+    name: http
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
 
 ingress:
   host: nginx
   name: nginx-ingress
+  namespace: nginx-namespace
   path: /
   targetPort: 80

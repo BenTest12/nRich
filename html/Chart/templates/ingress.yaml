@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.image.name }}-ingress
+  name: {{ .Values.ingress.name }}
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: {{ .Values.ingress.path }}
 spec:
   rules:
-  - host: {{ .Values.image.name }}
+  - host: {{ .Values.ingress.host }}
     http:
       paths:
-      - path: /
+      - path: {{ .Values.ingress.path }}
         pathType: Prefix
         backend:
           service:
-            name: {{ .Values.image.name }}-nodeport
+            name: {{ .Values.service.name }}
             port:
-              name: http
+              name: {{ .Values.service.ports.name }}

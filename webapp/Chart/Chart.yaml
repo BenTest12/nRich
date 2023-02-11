@@ -1,0 +1,4 @@
+apiVersion: v2
+name: nodejs-webapp
+version: 1
+description: A Helm chart which deploys a deployment of a nodejs app behind an nginx reverse proxy.

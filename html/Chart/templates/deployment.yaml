@@ -2,9 +2,12 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: {{ .Values.image.name }}
+  labels:
+      app: {{ .Values.image.name }}
 spec:
   containers:
   - name: {{ .Values.image.name }}
+    
     image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
     command: [ "/bin/bash", "-c", "sh /opt/edit-html.sh && nginx -g 'daemon off;'"]
     env:
@@ -22,4 +25,4 @@ spec:
           fieldPath: spec.nodeName
     imagePullPolicy: {{ .Values.image.pullPolicy }}
     ports:
-    - containerPort: {{ .Values.containerPort }}
+    - containerPort: {{ .Values.image.containerPort }}
