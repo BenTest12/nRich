@@ -7,7 +7,7 @@
 secrets.env
 
 # Auth files
-auth/
+terraform/auth/
 
 # Terraform files
 *.tfstate 
