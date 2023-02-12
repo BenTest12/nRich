@@ -7,7 +7,7 @@
 secrets.env
 
 # Auth files
-terraform/auth/*
+terraform/auth/
 
 # Terraform files
 *.tfstate 
@@ -18,7 +18,7 @@ terraform/auth/*
 # History files
 .history
 
-# User-specific files
+# User-specific files.
 *.rsuser
 *.suo
 *.user
