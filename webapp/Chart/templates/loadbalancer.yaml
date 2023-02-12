@@ -5,8 +5,11 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: nrich-webapp
+    app: nrich-pod
   ports:
   - name: http
     port: 80
+    targetPort: 80
+  - name: https
+    port: 4444
     targetPort: 4444
