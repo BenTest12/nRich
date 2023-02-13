@@ -13,7 +13,7 @@ This project is the homework i was assigned by the company to prove my knowledge
 * [Setup](#setup)
 
 ## General info
-**The Jenkins Configuration as Code (JCasC)** feature defines Jenkins configuration parameters in a human-readable YAML file that can be stored as source code. This essentially captures the configuration parameters and values that are used when configuring Jenkins from the web UI. The configuration can then be modified by editing this file and then applying it.
+**Will Update Soon** 
 
 
 ## Technologies
