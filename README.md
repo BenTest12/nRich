@@ -28,7 +28,7 @@ This Project was created with:
 * **Web App supplied by nrich**
 ## Setup
 
-**Will update soon**
+**Will Update Soon** 
 ## License
 
 [BSD3](https://github.com/teamdigitale/licenses/blob/master/BSD-3-Clause)
