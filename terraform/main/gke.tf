@@ -44,7 +44,7 @@ resource "google_container_cluster" "main" {
   }
 }
 
-# 
+# Creating a node pool with one node and configuring basic settings
 resource "google_container_node_pool" "pool" {
   name       = "pool"
   cluster    = google_container_cluster.main.id
@@ -79,62 +79,22 @@ resource "google_service_account" "kubernetes" {
   account_id = "kubernetes"
 }
 
-resource "google_compute_target_pool" "cluster_target_pool" {
-  name = "cluster-target-pool"
-  region = "europe-central2"
-}
-
+# Creating a bucket to store the registry
 resource "google_storage_bucket" "container_registry" {
   name     = var.project_name
   location = "EU"
 }
 
+# Creating a container registry
 resource "google_container_registry" "container_registry" {
   project = var.project_name
   location = "EU"
 }
 
-resource "google_service_account" "images-acc" {
-  account_id   = "images-acc"
-  project = var.project_name
-}
-
-resource "google_storage_bucket_iam_member" "viewer" {
+# Allowing the kubernetes service to pull and write images 
+# To the gcr by enabling storageAdmin permissions
+resource "google_storage_bucket_iam_member" "storageAdmin" {
   bucket = google_container_registry.container_registry.id
   role = "roles/storage.admin"
   member =  "serviceAccount:${google_service_account.kubernetes.email}"
-  #member = "serviceAccount:${google_service_account.images-acc.email}"
-}
-
-resource "google_compute_address" "external_ip" {
-  name = "external-ip"
-  region = "europe-central2"
-}
-
-resource "google_compute_forwarding_rule" "cluster_forwarding_rule" {
-  name    = "cluster-forwarding-rule"
-  region  = "europe-central2"
-  ip_protocol = "TCP"
-  port_range = "80"
-  target = google_compute_target_pool.cluster_target_pool.self_link
-  ip_address = google_compute_address.external_ip.address
-}
-
-# resource "google_compute_firewall" "private_access" {
-#   name    = "private-access"
-#   network = module.gke_cluster.network_name
-
-#   allow {
-#     protocol = "tcp"
-#     ports    = ["30000-32767"]
-#   }
-# }
-
-resource "google_compute_forwarding_rule" "cluster_forwarding_rule2" {
-  name    = "cluster-forwarding-rule2"
-  region  = "europe-central2"
-  ip_protocol = "TCP"
-  port_range = "30000-32767"
-  target = google_compute_target_pool.cluster_target_pool.self_link
-  ip_address = google_compute_address.external_ip.address
 }

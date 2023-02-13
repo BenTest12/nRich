@@ -1,25 +1,27 @@
-image:
-  name: nginx
-  namespace: nginx-namespace
-  repository: eu.gcr.io/nrich-terraform/nrich-html
-  tag: latest
-  pullPolicy: Always
-  containerPort: 80
+# values.yaml
+webapp:
+  name: nrich-webapp
+  image: nrich-webapp
+  
+  nginx:
+    name: nrich-nginx
+    image: nrich-nginx
 
-service:
-  name: nginx-loadbalancer
-  namespace: nginx-namespace
-  selector:
-    app: nginx
-  ports:
-    name: http
-    port: 80
-    targetPort: 80
+repository: eu.gcr.io/nrich-terraform
+
+lb:
+  name: nrich-webapp-lb
   type: LoadBalancer
 
 ingress:
-  host: nginx
-  name: nginx-ingress
-  namespace: nginx-namespace
-  path: /
-  targetPort: 80
+  name: nrich-webapp-ingress
+  host: nrich-webapp
+  target: /coin
+  path: /coin
+
+
+clusterIP:
+  name: nrich-webapp-clusterip
+  type: ClusterIP
+  port: 80
+  targetPort: 4444

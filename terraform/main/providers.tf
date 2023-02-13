@@ -1,3 +1,4 @@
+# Define GCP Provider
 terraform {
   required_providers {
     google = {
@@ -7,6 +8,7 @@ terraform {
   }
 }
 
+# Point to authentication code path and define project details
 provider "google" {
   credentials = file("${var.credentials_file}")
   project     = var.project_name

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Values.nginx.name }}
+  labels:
+    app: {{ .Values.nginx.name }}
+spec:
+  containers:
+  - name: {{ .Values.nginx.name }}
+    image: {{ .Values.repository }}/{{ .Values.nginx.image }}
+    imagePullPolicy: "Always"
+    ports:
+    - containerPort: 80

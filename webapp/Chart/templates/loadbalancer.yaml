@@ -1,15 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nrich-webapp-lb
+  name: {{ .Values.lb.name }}
 spec:
-  type: LoadBalancer
+  type: {{ .Values.type }}
   selector:
-    app: nrich-pod
+    app: {{ .Values.webapp.name }}
   ports:
   - name: http
     port: 80
-    targetPort: 80
-  - name: https
-    port: 4444
     targetPort: 4444

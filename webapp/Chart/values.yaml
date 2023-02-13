@@ -1,0 +1,9 @@
+appName: nrich
+imageRegistry: eu.gcr.io
+clusterIPPort: 80
+clusterIPTargetPort: 4444
+loadBalancerPort: 80
+loadBalancerTargetPort: 80
+loadBalancerHTTPSPort: 4444
+loadBalancerHTTPSTargetPort: 4444
+ingressHost: nrich-webapp
